@@ -13,7 +13,6 @@ public class Lexeme implements Component {
         this.type = type;
     }
 
-
     public static Lexeme word(String value) {
         return new Lexeme(value, LexemeEnum.WORD);
     }

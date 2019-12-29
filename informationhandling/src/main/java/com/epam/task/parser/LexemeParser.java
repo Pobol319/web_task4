@@ -18,17 +18,4 @@ public class LexemeParser extends AbstractParser {
         }
     }
 
-
- /*   @Override
-    public Component parse(String text) {
-        Pattern pattern = Pattern.compile(WORD_REG_EXP);
-        Matcher matcher = pattern.matcher(text);
-        if (matcher.matches()) {
-            return Lexeme.word(text);
-        } else if (text.matches(PUNCTUATION_MARK_REG_EXP)) {
-            return Lexeme.punctuationMark(text);
-        } else {
-            return Lexeme.expression(text);
-        }
-    }*/
 }
