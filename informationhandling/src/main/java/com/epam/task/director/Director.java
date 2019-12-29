@@ -3,61 +3,44 @@ package com.epam.task.director;
 
 import com.epam.task.chain_responsibility.ParserChainBuilder;
 import com.epam.task.component.Component;
-import com.epam.task.component.Lexeme;
 import com.epam.task.exception.ComponentException;
 import com.epam.task.exception.InformationTextReaderException;
 import com.epam.task.exception.InvalidExpressionParserException;
 import com.epam.task.exception.InvalidExpressionTextException;
-import com.epam.task.interpreter.ArithmeticExpressionInterpreter;
-import com.epam.task.interpreter.ArithmeticExpressionParser;
 import com.epam.task.parser.TextParser;
 import com.epam.task.reader.InformationTextReader;
 import com.epam.task.recovery.TextRecoveryExecutor;
-import com.epam.task.sorter.WordSorterByLength;
-
-import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Director {
-    public static void main(String[] args) throws ComponentException, InformationTextReaderException, InvalidExpressionTextException, InvalidExpressionParserException {
-        String path = "src\\main\\resources\\text.txt";
+    private InformationTextReader reader;
+    private ParserChainBuilder builder;
+    private TextRecoveryExecutor executor;
 
-        InformationTextReader reader = new InformationTextReader();
-        ParserChainBuilder builder = new ParserChainBuilder();
-        TextParser parser = builder.build();
-        String text = reader.read(path);
-        Component component = parser.parse(text);
+    private static final Logger LOG = LogManager.getRootLogger();
 
-        ArithmeticExpressionParser factory = new ArithmeticExpressionParser();
-        ArithmeticExpressionInterpreter interpreter = new ArithmeticExpressionInterpreter(factory);
+    public Director(InformationTextReader reader, ParserChainBuilder builder, TextRecoveryExecutor executor) {
+        this.reader = reader;
+        this.builder = builder;
+        this.executor = executor;
+    }
 
-        TextRecoveryExecutor executor = new TextRecoveryExecutor(interpreter);
-        String recoveryText = executor.executeRecovery(component);
+    public String handleInformation(String path) {
+        String recoveringText = null;
 
-        /*System.out.println(recoveryText);*/
+        try {
+            String text = reader.read(path);
 
-        /*ParagraphSorterBySentenceNumber sorter = new ParagraphSorterBySentenceNumber();
-        List<Component> sortedComposite = sorter.sort(component.getChild());
+            TextParser textParser = builder.build();
+            Component component = textParser.parse(text);
 
-        for (Component component1: sortedComposite){
-            System.out.println(executor.executeRecovery(component1));
-            System.out.println();
-        }*/
-
-        WordSorterByLength sorter = new WordSorterByLength();
-        List<Component> components = component.getChild();
-
-        List<Component> sortedComposite = null;
-        List<List<Component>> sortedAllText = null;
-        for (Component component1 : components) {
-            for (Component component2 : component1.getChild()) {
-                sortedComposite = sorter.sort(component2.getChild());
-                for (Component component3 : sortedComposite) {
-                    Lexeme lexeme = (Lexeme) component3;
-                    System.out.print(lexeme.getValue());
-                    System.out.println();
-                }
-            }
+            recoveringText = executor.executeRecovery(component);
+        } catch (InformationTextReaderException | ComponentException | InvalidExpressionTextException | InvalidExpressionParserException e) {
+            LOG.fatal(e);
         }
 
+        return recoveringText;
     }
+
 }
