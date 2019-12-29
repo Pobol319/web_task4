@@ -28,7 +28,6 @@ public class Director {
 
     public String handleInformation(String path) {
         String recoveringText = null;
-
         try {
             String text = reader.read(path);
 
@@ -39,7 +38,6 @@ public class Director {
         } catch (InformationTextReaderException | ComponentException | InvalidExpressionTextException | InvalidExpressionParserException e) {
             LOG.fatal(e);
         }
-
         return recoveringText;
     }
 

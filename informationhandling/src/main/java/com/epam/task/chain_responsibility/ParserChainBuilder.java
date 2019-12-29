@@ -4,7 +4,7 @@ import com.epam.task.parser.*;
 
 public class ParserChainBuilder {
 
-    public TextParser build(){
+    public TextParser build() {
         LexemeParser lexemeParser = new LexemeParser();
 
         SentenceParser sentenceParser = new SentenceParser();

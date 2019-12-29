@@ -19,7 +19,7 @@ public class NumberOfComponentChildrenComparator implements Comparator<Component
             children1 = component1.getChild();
             children2 = component2.getChild();
         } catch (ComponentException e) {
-           LOG.error("ComponentException in NumberOfComponentChildrenComparator class");
+            LOG.error("ComponentException in NumberOfComponentChildrenComparator class");
         }
 
         return children1.size() - children2.size();

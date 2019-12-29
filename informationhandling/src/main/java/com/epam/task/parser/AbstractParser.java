@@ -10,11 +10,11 @@ import java.util.regex.Pattern;
 public abstract class AbstractParser implements TextParser {
     private TextParser successor;
 
-    public void setSuccessor(TextParser successor){
+    public void setSuccessor(TextParser successor) {
         this.successor = successor;
     }
 
-    public TextParser getSuccessor(){
+    public TextParser getSuccessor() {
         return successor;
     }
 
@@ -23,7 +23,7 @@ public abstract class AbstractParser implements TextParser {
         Matcher matcher = pattern.matcher(text);
 
         Component compositeText = new Composite();
-        while (matcher.find()){
+        while (matcher.find()) {
             String matchingText = matcher.group();
             Component component = successor.parse(matchingText);
             compositeText.add(component);

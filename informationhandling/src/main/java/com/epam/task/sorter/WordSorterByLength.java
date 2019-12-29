@@ -13,9 +13,9 @@ public class WordSorterByLength implements Sorter<Component> {
     public List<Component> sort(List<Component> components) {
         List<Component> sortable = new ArrayList<>();
 
-        for(Component component: components){
+        for (Component component : components) {
             Lexeme lexeme = (Lexeme) component;
-            if(lexeme.isWord()){
+            if (lexeme.isWord()) {
                 sortable.add(component);
             }
         }

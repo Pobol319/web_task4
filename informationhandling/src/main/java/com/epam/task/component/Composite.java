@@ -6,7 +6,6 @@ import java.util.List;
 public class Composite implements Component {
     private List<Component> children = new ArrayList<>();
 
-
     @Override
     public void add(Component component) {
         children.add(component);

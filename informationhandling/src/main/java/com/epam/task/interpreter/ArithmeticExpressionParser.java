@@ -48,7 +48,6 @@ public class ArithmeticExpressionParser {
         while (operationMatcher.find()) {
             expressions.add(operationMatcher.group());
         }
-
         return expressions;
     }
 }
