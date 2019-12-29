@@ -3,14 +3,23 @@ package com.epam.task.parser;
 import com.epam.task.component.Component;
 import com.epam.task.component.Lexeme;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class LexemeParser extends AbstractParser {
-    private static final String WORD_REG_EXP = "\\w+";
     private static final String PUNCTUATION_MARK_REG_EXP = "-|,|;|:|\\.{3}|\\.|!|\\?|\\(|\\)";
+    private static final String EXPRESSION_REG_EXP = "[\\[](.*?)[\\]]";
 
     @Override
+    public Component parse(String text) {
+        if (text.matches(EXPRESSION_REG_EXP)) {
+            return Lexeme.expression(text);
+        } else if (text.matches(PUNCTUATION_MARK_REG_EXP)) {
+            return Lexeme.punctuationMark(text);
+        } else {
+            return Lexeme.word(text);
+        }
+    }
+
+
+ /*   @Override
     public Component parse(String text) {
         Pattern pattern = Pattern.compile(WORD_REG_EXP);
         Matcher matcher = pattern.matcher(text);
@@ -21,5 +30,5 @@ public class LexemeParser extends AbstractParser {
         } else {
             return Lexeme.expression(text);
         }
-    }
+    }*/
 }

@@ -4,11 +4,12 @@ package com.epam.task.director;
 import com.epam.task.chain_responsibility.ParserChainBuilder;
 import com.epam.task.component.Component;
 import com.epam.task.exception.ComponentException;
+import com.epam.task.exception.InformationTextReaderException;
 import com.epam.task.parser.TextParser;
 import com.epam.task.reader.InformationTextReader;
 
 public class Director {
-    public static void main(String[] args) throws ComponentException {
+    public static void main(String[] args) throws ComponentException, InformationTextReaderException {
         String path = "src\\main\\resources\\text.txt";
 
         InformationTextReader reader = new InformationTextReader();
@@ -19,7 +20,9 @@ public class Director {
 
         for (Component component1 : component.getChild()) {
             for (Component component2 : component1.getChild()) {
-                System.out.print(component2.toString() + " ");
+                for(Component component3: component2.getChild()){
+                    System.out.print(component3.toString() + " ");
+                }
             }
         }
 

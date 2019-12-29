@@ -1,9 +1,6 @@
 package com.epam.task.chain_responsibility;
 
-import com.epam.task.parser.LexemeParser;
-import com.epam.task.parser.ParagraphParser;
-import com.epam.task.parser.SentenceParser;
-import com.epam.task.parser.TextParser;
+import com.epam.task.parser.*;
 
 public class ParserChainBuilder {
 
@@ -16,6 +13,9 @@ public class ParserChainBuilder {
         ParagraphParser paragraphParser = new ParagraphParser();
         paragraphParser.setSuccessor(sentenceParser);
 
-        return paragraphParser;
+        FullTextParser fullTextParser = new FullTextParser();
+        fullTextParser.setSuccessor(paragraphParser);
+
+        return fullTextParser;
     }
 }

@@ -43,7 +43,7 @@ public class Lexeme implements Component {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return value;
     }
 
