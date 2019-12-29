@@ -12,6 +12,7 @@ public class NumberOfComponentChildrenComparatorTests {
 
     @Test
     public void testCompareShouldReturnPositiveIntegerWhenFirstCompositeHasMoreChildren() {
+        //given
         Component firstComponent = new Composite();
         Component secondComponent = new Composite();
         Composite firstComposite = new Composite();
@@ -23,14 +24,15 @@ public class NumberOfComponentChildrenComparatorTests {
         secondComposite.add(thirdComponent);
 
         Comparator<Component> comparator = new NumberOfComponentChildrenComparator();
-
+        //when
         int actual = comparator.compare(firstComposite, secondComposite);
-
+        //then
         Assert.assertTrue(actual > ZERO);
     }
 
     @Test
     public void testCompareShouldReturnNegativeIntegerWhenFirstCompositeHasLessChildren() {
+        //given
         Component firstComponent = new Composite();
         Composite firstComposite = new Composite();
         firstComposite.add(firstComponent);
@@ -42,14 +44,15 @@ public class NumberOfComponentChildrenComparatorTests {
         secondComposite.add(thirdComponent);
 
         Comparator<Component> comparator = new NumberOfComponentChildrenComparator();
-
+        //when
         int actual = comparator.compare(firstComposite, secondComposite);
-
+        //then
         Assert.assertTrue(actual < ZERO);
     }
 
     @Test
     public void testCompareShouldReturnZeroWhenCompositesHaveEqualNumberOfChildren() {
+        //given
         Component firstComponent = new Composite();
         Composite firstComposite = new Composite();
         firstComposite.add(firstComponent);
@@ -59,9 +62,9 @@ public class NumberOfComponentChildrenComparatorTests {
         secondComposite.add(secondComponent);
 
         Comparator<Component> comparator = new NumberOfComponentChildrenComparator();
-
+        //when
         int actual = comparator.compare(firstComposite, secondComposite);
-
+        //then
         Assert.assertEquals(ZERO, actual);
     }
 }
