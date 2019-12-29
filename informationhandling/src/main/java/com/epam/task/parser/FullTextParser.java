@@ -5,7 +5,7 @@ import com.epam.task.component.Composite;
 import com.epam.task.exception.ComponentException;
 
 public class FullTextParser extends AbstractParser {
-    private static final String FULL_TEXT_REG_EXP = "\n";
+    private static final String FULL_TEXT_REG_EXP = "   ";
 
     @Override
     public Component parse(String text) throws ComponentException {

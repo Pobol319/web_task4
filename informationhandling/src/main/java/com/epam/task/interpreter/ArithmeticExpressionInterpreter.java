@@ -6,9 +6,9 @@ import com.epam.task.exception.InvalidExpressionTextException;
 import java.util.List;
 
 public class ArithmeticExpressionInterpreter {
-    private ArithmeticExpressionFactory expressionParser;
+    private ArithmeticExpressionParser expressionParser;
 
-    public ArithmeticExpressionInterpreter(ArithmeticExpressionFactory expressionParser) {
+    public ArithmeticExpressionInterpreter(ArithmeticExpressionParser expressionParser) {
         this.expressionParser = expressionParser;
     }
 
@@ -22,7 +22,7 @@ public class ArithmeticExpressionInterpreter {
             throw new InvalidExpressionParserException("Expression parser value is null");
         }
 
-        List<AbstractExpression<Integer>> expressions = expressionParser.createExpression(expressionText);
+        List<AbstractExpression<Integer>> expressions = expressionParser.parse(expressionText);
 
         Context<Integer> context = new IntegerContext();
 

@@ -43,11 +43,6 @@ public class Lexeme implements Component {
     }
 
     @Override
-    public String toString() {
-        return value;
-    }
-
-    @Override
     public void add(Component component) throws ComponentException {
         throw new ComponentException("Cant add component to Leaf");
     }
@@ -58,7 +53,7 @@ public class Lexeme implements Component {
     }
 
     @Override
-    public List<Component> getChild() throws ComponentException {
-        throw new ComponentException("Cant get list of components from Leaf");
+    public List<Component> getChild() {
+        return null;
     }
 }

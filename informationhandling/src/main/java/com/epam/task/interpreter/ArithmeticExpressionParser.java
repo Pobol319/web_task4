@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ArithmeticExpressionFactory {
+public class ArithmeticExpressionParser {
     private static final String NUMBERS_REG_EXP = "\\d+";
     private static final String OPERATIONS_REG_EXP = "[+\\-/*^]";
 
-    public List<AbstractExpression<Integer>> createExpression(String expressionText) {
+    public List<AbstractExpression<Integer>> parse(String expressionText) {
         List<AbstractExpression<Integer>> expressions = new ArrayList<>();
 
         List<String> textExpressions = splitExpression(expressionText, NUMBERS_REG_EXP);
@@ -36,7 +36,6 @@ public class ArithmeticExpressionFactory {
                     break;
             }
         }
-
         return expressions;
     }
 

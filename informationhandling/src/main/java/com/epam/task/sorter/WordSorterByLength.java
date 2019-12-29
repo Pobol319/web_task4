@@ -1,24 +1,26 @@
 package com.epam.task.sorter;
 
 import com.epam.task.comparator.LexemeLengthComparator;
+import com.epam.task.component.Component;
 import com.epam.task.component.Lexeme;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordSorterByLength implements Sorter<Lexeme> {
+public class WordSorterByLength implements Sorter<Component> {
 
     @Override
-    public List<Lexeme> sort(List<Lexeme> lexemes) {
-        List<Lexeme> sortable = new ArrayList<>();
+    public List<Component> sort(List<Component> components) {
+        List<Component> sortable = new ArrayList<>();
 
-        for(Lexeme lexeme: lexemes){
+        for(Component component: components){
+            Lexeme lexeme = (Lexeme) component;
             if(lexeme.isWord()){
-                sortable.add(lexeme);
+                sortable.add(component);
             }
         }
 
-        lexemes.sort(new LexemeLengthComparator());
+        sortable.sort(new LexemeLengthComparator());
 
         return sortable;
     }
